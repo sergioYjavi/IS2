@@ -6,17 +6,23 @@
 package practica1;
 
 import java.util.ArrayList;
+import  java.lang.Exception;
+import static practica1.Cesion.limiteDinero2;
 
 /**
  *
  * @author alumno
  */
-public  class Miembro extends Practica1{
+public  class Miembro extends ClasePrincipal{
+
+    
+
+    static float limiteDinero2;
     int num_socio;
     String nombre;
     int num_motos;
-    float importe_total;
-    int total_socios = 0;
+    float importe_total = 0;
+    static int total_socios;
     ArrayList<Miembro> miembros = new ArrayList<Miembro>();
     ArrayList<Moto> motos;
 
@@ -33,22 +39,39 @@ public  class Miembro extends Practica1{
      */
     @SuppressWarnings("empty-statement")
     
-    public Miembro(String nombre, int num_motos, float importe_total)throws memberAlreadyExistException {
+    public Miembro(String nombre, int num_motos, float importe_total)throws memberAlreadyExistException, illegalAmountOfMoneyException {
         int i;
         Miembro auxiliar;
        for( i = 0 ; i < miembros.size(); i++) {auxiliar = miembros.get(i);
-        if(auxiliar.getNum_socio() == num_socio)
+            if(auxiliar.getNum_socio() == num_socio)
             {throw new memberAlreadyExistException("Este numero de socio ya está siendo utilizado. ");}
-       }
+            }
         this.nombre = nombre;
         this.num_motos = num_motos;
-        this.importe_total = importe_total;
+        if (this.importe_total < limiteDinero2 )
+        {
+            this.importe_total = importe_total;
+        }
+        else 
+        {   
+            throw new illegalAmountOfMoneyException
+                    ("El importe total de sus motos ascenderá a mas de "+ limiteDinero2 +"euros. ");
+        }
         total_socios++;
         this.motos= new ArrayList<>();
         num_socio = total_socios++;
         
+    
+        
     }
     
+    public static void setLimite_dinero(float limite_dinero) {
+         limiteDinero2 = limite_dinero;
+        }
+    
+    public static void setTotalSocios(int totalSocios) {
+         total_socios = totalSocios;
+    }
     /**
      *
      * @return
