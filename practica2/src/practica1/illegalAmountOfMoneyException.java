@@ -5,6 +5,8 @@
  */
 package practica1;
 
+import static practica1.Miembro.limiteDinero2;
+
 /**
  *
  * @author media
@@ -12,7 +14,7 @@ package practica1;
 public class illegalAmountOfMoneyException extends Exception {
 
     public illegalAmountOfMoneyException(String menuda_excepcion) {
-     
+     System.out.println("El importe total de sus motos ascenderá a mas de el limite de euros. ");
     }
     
 }

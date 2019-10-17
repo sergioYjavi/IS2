@@ -19,7 +19,7 @@ import java.util.Scanner;
  * @author Sergio Martínez Llopis
  * 
  */
-public class Practica1 {
+public class ClasePrincipal {
 
     /**
      *
@@ -30,7 +30,7 @@ public class Practica1 {
      */
     public static void main(String[] args) throws memberAlreadyExistException, ParseException, illegalAmountOfMoneyException {
         
-        int num_socio;
+        int num_socio, totalSocios = 0;
         String nombre_miembro;
         int num_motos;
         float importe_total;
@@ -48,8 +48,14 @@ public class Practica1 {
         String miembro_antiguo, miembro_nuevo;
         String opcion = "0";
         Scanner sc = new Scanner(System.in);
+        float limite_dinero;
 
-        
+        System.out.println("Introduce el limite de dinero de motos por miembro : ");
+        limite_dinero = sc.nextFloat();
+        sc.nextLine();
+        Cesion.setLimite_dinero(limite_dinero);
+        Miembro.setLimite_dinero(limite_dinero);
+        Miembro.setTotalSocios(totalSocios);
         
         do{
             System.out.println("1)Registrar un nuevo miembro");
@@ -61,7 +67,6 @@ public class Practica1 {
             System.out.println("7)Salir del programa");
         
             opcion = sc.nextLine();
-        
             switch(opcion){
                 case "1":
                 
@@ -70,11 +75,25 @@ public class Practica1 {
                     nombre_miembro = (sc.nextLine());
                     System.out.print("Introduce el numero de motos del socio: ");
                     num_motos = (sc.nextInt());
-                    System.out.print("Introduce el importe total de las motos : ");
+                   
+                    
+                    do {
+                        System.out.print("Introduce el importe total de las motos : ");
                     importe_total = (sc.nextFloat());
-
-                     miembro = new Miembro(nombre_miembro,num_motos, importe_total);
-                     miembros.add(miembro);
+                    sc.nextLine();
+                     try{   
+                        miembro = new Miembro(nombre_miembro,num_motos, importe_total);
+                        
+                       }
+                        catch (illegalAmountOfMoneyException e){
+                            System.out.print("Introduce de nuevo el importe total de las motos : ");
+                            importe_total = (sc.nextFloat());
+                            sc.nextLine();
+                     }
+                        }while(importe_total > limite_dinero);
+                            miembro = new Miembro(nombre_miembro,num_motos, importe_total);
+                            miembros.add(miembro);
+                            totalSocios++;
                      break;
                  
                 case "2": 
@@ -89,6 +108,7 @@ public class Practica1 {
                     propietario = (sc.nextLine());
                     System.out.println("Introduce el precio : ");
                     precio = (sc.nextFloat());
+                    sc.nextLine();
 
                     moto = new Moto(matricula,caracteristicas,nombre_moto,propietario, precio);
                     break;
@@ -125,12 +145,12 @@ public class Practica1 {
                      cesion = new Cesion(motillo,viejecillo,nuevecillo,fecha);
                      registro.add(cesion);
                     
-                    
                 case "4": 
                     Miembro auxiliar;
                     for( int i = 0 ; i < miembros.size(); i++) {auxiliar = miembros.get(i);
                         if(auxiliar.getNum_motos() > 0)
-                            System.out.println( miembros.get(i).getNombre());
+                            System.out.print( miembros.get(i).getNombre());
+                        System.out.println( miembros.get(i).getNum_socio());
                     }
                     break;
                     
@@ -155,5 +175,26 @@ public class Practica1 {
             
         }while (opcion != "7");
 
-    } 
+    }
+    protected String string;
+    private float limite_dinero;
+
+    /**
+     * Get the value of string
+     *
+     * @return the value of string
+     */
+    public String getString() {
+        return string;
+    }
+
+    /**
+     * Set the value of string
+     *
+     * @param string new value of string
+     */
+    public void setString(String string) {
+        this.string = string;
+    }
+ 
 }

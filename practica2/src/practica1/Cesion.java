@@ -12,11 +12,15 @@ import  java.lang.Exception;
  *
  * @author alumno
  */
-public class Cesion extends Practica1 {
+public class Cesion extends ClasePrincipal {
+
+    
     Moto moto_implicada;
     Miembro antiguo, nuevo;
     Date fecha;
     ArrayList<Cesion> registro = new ArrayList<>();
+    static float limiteDinero2 = 6000;
+
 
     /**
      *
@@ -31,19 +35,22 @@ public class Cesion extends Practica1 {
         this.antiguo = antiguo;
         this.nuevo = nuevo;
         this.fecha = fecha;
-        if (antiguo.getImporte_total()+moto_implicada.getPrecio() > 6000){
+        if (nuevo.getImporte_total()+moto_implicada.getPrecio() > limiteDinero2){
             
             throw new illegalAmountOfMoneyException
-                    ("El importe total de sus motos ascenderá a mas de 6000 euros. ");
+                    ("El importe total de sus motos ascenderá a mas de "+ limiteDinero2 +"euros. ");
         }
         else 
-            antiguo.setImporte_total(antiguo.getImporte_total()+ moto_implicada.getPrecio());
+            nuevo.setImporte_total(nuevo.getImporte_total()+ moto_implicada.getPrecio());
+            antiguo.setImporte_total(antiguo.getImporte_total()- moto_implicada.getPrecio());
     }
 
     Cesion(Moto motillo, Miembro viejecillo, Miembro nuevecillo, String fecha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    public static void setLimite_dinero(float limite_dinero) {
+            limiteDinero2 = limite_dinero;
+        }
     /**
      *
      * @return

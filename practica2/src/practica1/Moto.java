@@ -9,7 +9,7 @@ package practica1;
  *
  * @author alumno
  */
-public class Moto extends Practica1{
+public class Moto extends ClasePrincipal{
     String matricula;
     String caracteristicas;
     String nombre;
