@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,6 +42,7 @@ public  class Miembro extends ClasePrincipal{
     
     public Miembro(String nombre, int num_motos, float importe_total)throws memberAlreadyExistException, illegalAmountOfMoneyException {
         int i;
+        //System.out.println("total miembros = "+ total_socios);
         Miembro auxiliar;
        for( i = 0 ; i < miembros.size(); i++) {auxiliar = miembros.get(i);
             if(auxiliar.getNum_socio() == num_socio)
@@ -51,15 +53,17 @@ public  class Miembro extends ClasePrincipal{
         if (this.importe_total < limiteDinero2 )
         {
             this.importe_total = importe_total;
-        }
+                //total_socios++;
+        }/*
         else 
         {   
             throw new illegalAmountOfMoneyException
                     ("El importe total de sus motos ascenderá a mas de "+ limiteDinero2 +"euros. ");
         }
-        total_socios++;
+    */
+            
         this.motos= new ArrayList<>();
-        num_socio = total_socios++;
+        num_socio = total_socios;
         
     
         

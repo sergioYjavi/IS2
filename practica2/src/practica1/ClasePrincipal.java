@@ -12,6 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import static practica1.Miembro.limiteDinero2;
+import practica1.illegalAmountOfMoneyException;
+
 
 /**
  *
@@ -83,17 +86,25 @@ public class ClasePrincipal {
                     sc.nextLine();
                      try{   
                         miembro = new Miembro(nombre_miembro,num_motos, importe_total);
-                        
+                          if (importe_total > limiteDinero2 ){
+                        illegalAmountOfMoneyException e = new illegalAmountOfMoneyException("La hemos liao");
+                        throw e  ;
+                          }
                        }
+
                         catch (illegalAmountOfMoneyException e){
-                            System.out.print("Introduce de nuevo el importe total de las motos : ");
+                           System.out.print("Introduce de nuevo el importe total de las motos  : ");
                             importe_total = (sc.nextFloat());
                             sc.nextLine();
+                            
+                           
                      }
                         }while(importe_total > limite_dinero);
+                            Miembro.total_socios++;
+                            totalSocios++;
                             miembro = new Miembro(nombre_miembro,num_motos, importe_total);
                             miembros.add(miembro);
-                            totalSocios++;
+                          
                      break;
                  
                 case "2": 
@@ -149,7 +160,7 @@ public class ClasePrincipal {
                     Miembro auxiliar;
                     for( int i = 0 ; i < miembros.size(); i++) {auxiliar = miembros.get(i);
                         if(auxiliar.getNum_motos() > 0)
-                            System.out.print( miembros.get(i).getNombre());
+                            System.out.print( miembros.get(i).getNombre()+ " ");
                         System.out.println( miembros.get(i).getNum_socio());
                     }
                     break;
