@@ -102,6 +102,7 @@ public class ClasePrincipal {
                      }
                         }while(importe_total > limite_dinero);
                             Miembro.total_socios++;
+                            Miembro.total_id++;
                             totalSocios++;
                             miembro = new Miembro(nombre_miembro,num_motos, importe_total);
                             miembros.add(miembro);
@@ -209,6 +210,12 @@ public class ClasePrincipal {
                             
                         }
                     }
+                    break;
+                    
+                case "8":
+                    System.out.println("Dame el id del miembro a eliminar ( el excluidito de turno )");
+                    int variable = sc.nextInt();
+                    miembros.remove(variable);
                     break;
                     
                     

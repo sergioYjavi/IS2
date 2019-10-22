@@ -8,6 +8,8 @@ package practica1;
 
 import java.util.ArrayList;
 import  java.lang.Exception;
+import java.util.Date;
+import java.util.Scanner;
 import static practica1.Cesion.limiteDinero2;
 
 /**
@@ -24,6 +26,9 @@ public  class Miembro extends ClasePrincipal{
     int num_motos;
     float importe_total = 0;
     static int total_socios;
+    static int total_id;
+    Date fecha = new Date();
+    Scanner sc = new Scanner(System.in);
     ArrayList<Miembro> miembros = new ArrayList<Miembro>();
     ArrayList<Moto> motos;
 
@@ -57,6 +62,7 @@ public  class Miembro extends ClasePrincipal{
             this.importe_total = importe_total;
                 //total_socios++;
         }
+        
         /*
         else 
         {   
@@ -66,9 +72,23 @@ public  class Miembro extends ClasePrincipal{
         */
             
         this.motos= new ArrayList<>();
-        num_socio = total_socios;
+        
+        num_socio = total_id;
  
     }
+    
+    public void eliminarMiembro(int idMiembro) throws illegalAmountOfMoneyException{
+        if (num_motos > 0){
+            System.out.println( "Tienes que ceder la moto a alguien."); 
+            for (int i = 0 ; i < num_motos; i++){ 
+                System.out.println( "La id del nuevo miembro :"); 
+                int b = sc.nextInt(); 
+                Cesion a = new Cesion(motos.get(i),miembros.get(idMiembro) , miembros.get(b), fecha ); 
+            } 
+        } 
+        total_socios--; 
+        System.out.println("Se ha eliminado el miembro exitosamente"); 
+    };
     
     public static void setLimite_dinero(float limite_dinero) {
          limiteDinero2 = limite_dinero;
