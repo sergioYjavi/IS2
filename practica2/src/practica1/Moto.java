@@ -15,6 +15,7 @@ public class Moto extends ClasePrincipal{
     String nombre;
     String propietario;
     float precio;
+    float otrosGastos;
 
     /**
      *
@@ -24,12 +25,13 @@ public class Moto extends ClasePrincipal{
      * @param propietario
      * @param precio
      */
-    public Moto(String matricula, String caracteristicas, String nombre, String propietario, float precio) {
+    public Moto(String matricula, String caracteristicas, String nombre, String propietario, float precio,float otrosGastos) {
         this.matricula = matricula;
         this.caracteristicas = caracteristicas;
         this.nombre = nombre;
         this.propietario = propietario;
         this.precio = precio;
+        this.otrosGastos = otrosGastos;
     }
 
     /**
@@ -111,7 +113,17 @@ public class Moto extends ClasePrincipal{
     public void setPrecio(float precio) {
         this.precio = precio;
     }
+
+    public float getOtrosGastos() {
+        return otrosGastos;
+    }
+
+    public void setOtrosGastos(float otrosGastos) {
+        this.otrosGastos = otrosGastos;
+    }
     
-    
-    
+    public void añadirMasGastos(float incrementoGastos){
+        this.otrosGastos = otrosGastos + incrementoGastos;
+    }
+  
 }

@@ -37,14 +37,14 @@ public class ClasePrincipal {
         String nombre_miembro;
         int num_motos;
         float importe_total;
-        ArrayList<Moto> motos = null;
+        ArrayList<Moto> motos = new ArrayList<Moto>();
         ArrayList<Miembro> miembros = new ArrayList<Miembro>();
-        String matricula;
+        String matricula, matriculaGastos;
         String caracteristicas;
         String nombre_moto;
         String propietario;
-        float precio;
-         Moto moto_implicada;
+        float precio, otrosGastos = 0,incrementoGastos;
+        Moto moto_implicada;
         Miembro antiguo, nuevo;
         Date fecha;
         ArrayList<Cesion> registro = new ArrayList<>();
@@ -67,7 +67,8 @@ public class ClasePrincipal {
             System.out.println("4)Mostrar en pantalla los miembros con motos en posesión");
             System.out.println("5)Listar todas las motos");
             System.out.println("6)Mostrar las cesiones realizadas");
-            System.out.println("7)Salir del programa");
+            System.out.println("7)Incrementar otros gastos a una moto");
+            System.out.println("9)Salir del programa");
         
             opcion = sc.nextLine();
             switch(opcion){
@@ -90,7 +91,7 @@ public class ClasePrincipal {
                         illegalAmountOfMoneyException e = new illegalAmountOfMoneyException("La hemos liao");
                         throw e  ;
                           }
-                       }
+                        }
 
                         catch (illegalAmountOfMoneyException e){
                            System.out.print("Introduce de nuevo el importe total de las motos  : ");
@@ -120,8 +121,12 @@ public class ClasePrincipal {
                     System.out.println("Introduce el precio : ");
                     precio = (sc.nextFloat());
                     sc.nextLine();
-
-                    moto = new Moto(matricula,caracteristicas,nombre_moto,propietario, precio);
+                    System.out.println("Introduce el importe de los otros gastos de la moto, como su mantenimiento : ");
+                    otrosGastos = (sc.nextFloat());
+                    sc.nextLine();
+                    
+                    moto = new Moto(matricula,caracteristicas,nombre_moto,propietario, precio, otrosGastos);
+                    motos.add(moto);
                     break;
                     
                 case "3":
@@ -132,7 +137,10 @@ public class ClasePrincipal {
                     nombre_moto = (sc.nextLine());
                     propietario = (sc.nextLine());
                     precio = (sc.nextFloat());
-                    motillo = new Moto (matricula,caracteristicas,nombre_moto,propietario,precio);
+                    System.out.println("Introduce el importe de los otros gastos de la moto, como su mantenimiento : ");
+                    otrosGastos = (sc.nextFloat());
+                    sc.nextLine();
+                    motillo = new Moto (matricula,caracteristicas,nombre_moto,propietario,precio,otrosGastos);
 
                     Miembro nuevecillo; 
                     num_socio = (sc.nextInt());
@@ -161,15 +169,22 @@ public class ClasePrincipal {
                     for( int i = 0 ; i < miembros.size(); i++) {auxiliar = miembros.get(i);
                         if(auxiliar.getNum_motos() > 0)
                             System.out.print( miembros.get(i).getNombre()+ " ");
-                        System.out.println( miembros.get(i).getNum_socio());
+                            System.out.println( miembros.get(i).getNum_socio());
                     }
                     break;
                     
-                case "5":  Moto la_moto;
-                    for( int i = 0 ; i < motos.size(); i++) {la_moto = motos.get(i);
-                        System.out.println( "la moto :"+la_moto.nombre+"matriculada con :"+la_moto.matricula +
-                        "con caracteristicas "+la_moto.caracteristicas+"de precio "+
-                        la_moto.precio+"con propietario " +la_moto.propietario);
+                case "5":  
+                    Moto la_moto;
+                    for( int i = 0 ; i < motos.size(); i++) {
+                        la_moto = motos.get(i);
+                        System.out.println("-------------------------------------");
+                        System.out.println("Matricula : " + la_moto.matricula);
+                        System.out.println("Nombre moto :" + la_moto.nombre);
+                        System.out.println("Precio : " + la_moto.precio);
+                        System.out.println("Caracteristicas : " + la_moto.caracteristicas);
+                        System.out.println("Propietario : " + la_moto.propietario);
+                        System.out.println("Otros gastos : " + la_moto.otrosGastos);
+                        System.out.println("-------------------------------------");
                     }
                     break;
                     
@@ -180,11 +195,27 @@ public class ClasePrincipal {
                             +"nuevo propietario : "+ auxiliar1.nuevo+"con fecha "+auxiliar1.fecha);
                     }
                     break;
+                
+                case "7":
+                    System.out.println("Indique la matricula de la moto que quire incrementar los gastos :  ");
+                    matriculaGastos = sc.nextLine();
+                    System.out.println("Indique el incremento de gastos en esta moto : ");
+                    incrementoGastos = sc.nextFloat();
+                    sc.nextLine();
                     
-                case "7": System.exit(0);                   
+                    for (int i=0; i < motos.size(); i++){
+                        if (matriculaGastos.equals(motos.get(i).getMatricula())){
+                            motos.get(i).añadirMasGastos(incrementoGastos);
+                            
+                        }
+                    }
+                    break;
+                    
+                    
+                case "9": System.exit(0);                   
             }
             
-        }while (opcion != "7");
+        }while (opcion != "9");
 
     }
     protected String string;

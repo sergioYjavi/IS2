@@ -44,9 +44,11 @@ public  class Miembro extends ClasePrincipal{
         int i;
         //System.out.println("total miembros = "+ total_socios);
         Miembro auxiliar;
-       for( i = 0 ; i < miembros.size(); i++) {auxiliar = miembros.get(i);
+        for( i = 0 ; i < miembros.size(); i++) {
+            auxiliar = miembros.get(i);
             if(auxiliar.getNum_socio() == num_socio)
-            {throw new memberAlreadyExistException("Este numero de socio ya está siendo utilizado. ");}
+            {
+                throw new memberAlreadyExistException("Este numero de socio ya está siendo utilizado. ");}
             }
         this.nombre = nombre;
         this.num_motos = num_motos;
@@ -54,19 +56,18 @@ public  class Miembro extends ClasePrincipal{
         {
             this.importe_total = importe_total;
                 //total_socios++;
-        }/*
+        }
+        /*
         else 
         {   
             throw new illegalAmountOfMoneyException
                     ("El importe total de sus motos ascenderá a mas de "+ limiteDinero2 +"euros. ");
         }
-    */
+        */
             
         this.motos= new ArrayList<>();
         num_socio = total_socios;
-        
-    
-        
+ 
     }
     
     public static void setLimite_dinero(float limite_dinero) {
@@ -155,10 +156,4 @@ public  class Miembro extends ClasePrincipal{
     public void setMotos(ArrayList<Moto> motos) {
         this.motos = motos;
     }
-    
-    
-    
-    
-    
-    
 }
