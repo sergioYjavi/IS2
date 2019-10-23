@@ -31,6 +31,7 @@ public  class Miembro extends ClasePrincipal{
     Scanner sc = new Scanner(System.in);
     ArrayList<Miembro> miembros = new ArrayList<Miembro>();
     ArrayList<Moto> motos;
+    int totalCesiones;
 
     public Miembro() {
     }
@@ -88,7 +89,8 @@ public  class Miembro extends ClasePrincipal{
             for (int i = 0 ; i < num_motos; i++){ 
                 System.out.println( "La id del nuevo miembro :"); 
                 int b = sc.nextInt(); 
-                Cesion a = new Cesion(motos.get(i),miembros.get(idMiembro) , miembros.get(b), fecha ); 
+                //Cesion a = new Cesion(motos.get(i),miembros.get(idMiembro) , miembros.get(b), fecha ); 
+                
             } 
         } 
         total_socios--; 
@@ -181,4 +183,14 @@ public  class Miembro extends ClasePrincipal{
     public void setMotos(ArrayList<Moto> motos) {
         this.motos = motos;
     }
+
+    public int getTotalCesiones() {
+        return totalCesiones;
+    }
+
+    public void setTotalCesiones(int totalCesiones) {
+        this.totalCesiones = totalCesiones;
+    }
+    
+    
 }

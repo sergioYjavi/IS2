@@ -35,16 +35,20 @@ public class Cesion extends ClasePrincipal {
         this.antiguo = antiguo;
         this.nuevo = nuevo;
         this.fecha = fecha;
-        if (nuevo.getImporte_total()+moto_implicada.getPrecio() > limiteDinero2){
+        /*
+        if (nuevo.getImporte_total()+ moto_implicada.getPrecio() > limiteDinero2){
             
             throw new illegalAmountOfMoneyException
                     ("El importe total de sus motos ascenderá a mas de "+ limiteDinero2 +"euros. ");
         }
         else 
+        */
             nuevo.setImporte_total(nuevo.getImporte_total()+ moto_implicada.getPrecio());
             antiguo.setImporte_total(antiguo.getImporte_total()- moto_implicada.getPrecio());
+            nuevo.totalCesiones++;
     }
 
+    
     Cesion(Moto motillo, Miembro viejecillo, Miembro nuevecillo, String fecha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

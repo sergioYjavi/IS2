@@ -14,7 +14,7 @@ public class Moto extends ClasePrincipal{
     String caracteristicas;
     String nombre;
     String propietario;
-    float precio;
+    float precio= 0;
     float otrosGastos;
     
 
