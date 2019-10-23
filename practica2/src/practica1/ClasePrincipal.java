@@ -68,6 +68,7 @@ public class ClasePrincipal {
             System.out.println("5)Listar todas las motos");
             System.out.println("6)Mostrar las cesiones realizadas");
             System.out.println("7)Incrementar otros gastos a una moto");
+            System.out.println("8)Eliminar miembro");
             System.out.println("9)Salir del programa");
         
             opcion = sc.nextLine();
@@ -168,9 +169,11 @@ public class ClasePrincipal {
                 case "4": 
                     Miembro auxiliar;
                     for( int i = 0 ; i < miembros.size(); i++) {auxiliar = miembros.get(i);
-                        if(auxiliar.getNum_motos() > 0)
-                            System.out.print( miembros.get(i).getNombre()+ " ");
-                            System.out.println( miembros.get(i).getNum_socio());
+                        if (miembros.get(i) != null) {
+                            if(auxiliar.getNum_motos() > 0)
+                                System.out.print( miembros.get(i).getNombre()+ " ");
+                                System.out.println( miembros.get(i).getNum_socio());
+                        }
                     }
                     break;
                     
@@ -215,9 +218,12 @@ public class ClasePrincipal {
                 case "8":
                     System.out.println("Dame el id del miembro a eliminar ( el excluidito de turno )");
                     int variable = sc.nextInt();
-                    miembros.remove(variable);
-                    break;
+                    sc.nextLine();
+                    miembros.remove(variable-1);
+                    miembros.add(variable-1,null);
                     
+                    
+                    break;
                     
                 case "9": System.exit(0);                   
             }

@@ -77,6 +77,11 @@ public  class Miembro extends ClasePrincipal{
  
     }
     
+    /**
+     *
+     * @param idMiembro
+     * @throws illegalAmountOfMoneyException
+     */
     public void eliminarMiembro(int idMiembro) throws illegalAmountOfMoneyException{
         if (num_motos > 0){
             System.out.println( "Tienes que ceder la moto a alguien."); 
